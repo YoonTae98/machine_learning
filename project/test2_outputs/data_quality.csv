@@ -1,0 +1,12 @@
+﻿,dtype,missing,missing_rate,nunique
+Gender,object,0,0.0,2
+Age,int64,0,0.0,66
+Driving_License,int64,0,0.0,2
+Region_Code,float64,0,0.0,53
+Previously_Insured,int64,0,0.0,2
+Vehicle_Age,object,0,0.0,3
+Vehicle_Damage,object,0,0.0,2
+Annual_Premium,float64,0,0.0,43295
+Policy_Sales_Channel,float64,0,0.0,151
+Vintage,int64,0,0.0,290
+Response,int64,0,0.0,2

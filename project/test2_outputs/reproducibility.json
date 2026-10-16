@@ -1,0 +1,30 @@
+{
+  "python": "3.10.22 (main, Oct  1 2026, 00:48:01) [Clang 21.0.0 (clang-2100.3.34.2)]",
+  "packages": {
+    "numpy": "1.23.5",
+    "pandas": "1.5.3",
+    "scipy": "1.9.3",
+    "matplotlib": "3.6.3",
+    "seaborn": "0.13.2",
+    "scikit-learn": "1.0.2",
+    "xgboost": "1.7.6",
+    "lightgbm": "4.5.0",
+    "ipykernel": "7.3.0",
+    "nbformat": "5.11.1",
+    "nbclient": "0.11.0"
+  },
+  "seed": 42,
+  "input_sha256": {
+    "train.csv": "3b60d1072851756367817fb155e6e755ffa79509daa806720719bc395dfbea7d",
+    "test.csv": "c6a181deaec964fc30de2238a2d7533f3872fb74ad8b2a481ef1bfc3bbfc6ecc",
+    "sample_submission.csv": "87bf75e926c36a0974282eb209c21e6fe303fa2f8cb7037bde6dad55e4175bb3",
+    "Guidline.pdf": "e8b232a37e40a6485c845b5461c7fd3b1adce98fa424b49d1fa0a94127ca3dc7"
+  },
+  "split_rows": {
+    "fit": 228665,
+    "validation": 76222,
+    "holdout": 76222
+  },
+  "submission_fit_rows": 381109,
+  "submission_rows": 127037
+}
