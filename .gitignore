@@ -3,3 +3,8 @@
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
+./test.csv
+./train.csv
+./submission.csv
+./submission_probability.csv
+./ML_Class/data
