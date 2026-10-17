@@ -1,26 +1,46 @@
 import { operatingPointComparison } from "@/data/dashboard";
 
+
 export default function ThresholdComparison() {
-  const f1Optimal = operatingPointComparison[0];
-  const recall95 = operatingPointComparison[1];
+
+  const f1Optimal =
+    operatingPointComparison[0];
+
+  const recall95 =
+    operatingPointComparison[1];
+
 
   const extraCandidates =
-    recall95.predictedPositive - f1Optimal.predictedPositive;
+    recall95.predictedPositive -
+    f1Optimal.predictedPositive;
+
 
   const reducedFN =
-    f1Optimal.fn - recall95.fn;
+    f1Optimal.fn -
+    recall95.fn;
+
 
   const additionalTP =
-    recall95.tp - f1Optimal.tp;
+    recall95.tp -
+    f1Optimal.tp;
+
 
   const recallGain =
-    (recall95.recall - f1Optimal.recall) * 100;
+    (
+      recall95.recall -
+      f1Optimal.recall
+    ) * 100;
 
-  const precisionChange =
-    (recall95.precision - f1Optimal.precision) * 100;
+
+  const precisionDrop =
+    (
+      f1Optimal.precision -
+      recall95.precision
+    ) * 100;
+
 
   return (
-    <div className="dashboard-panel">
+    <div className="dashboard-panel threshold-panel">
 
       {/* ========================================
           HEADER
@@ -53,50 +73,57 @@ export default function ThresholdComparison() {
       </div>
 
 
+
       {/* ========================================
-          STRATEGY CARDS
+          STRATEGY COMPARISON
       ======================================== */}
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "18px",
-          marginTop: "24px",
-        }}
-      >
+      <div className="threshold-strategy-grid">
 
-        {/* F1 OPTIMAL */}
+        {/* ====================================
+            F1 OPTIMAL
+        ==================================== */}
 
-        <div
-          style={{
-            padding: "24px",
-            borderRadius: "22px",
-            border:
-              "1px solid rgba(100, 120, 190, 0.14)",
-            background:
-              "rgba(247, 249, 255, 0.72)",
-          }}
-        >
+        <div className="threshold-strategy-card threshold-balanced">
 
-          <span className="eyebrow">
-            BALANCED MODE
-          </span>
+          <div className="threshold-card-top">
 
-          <h3 style={{ marginTop: "8px" }}>
+            <span className="threshold-mode-label">
+              BALANCED MODE
+            </span>
+
+            <span className="threshold-badge threshold-badge-balanced">
+              균형 운영
+            </span>
+
+          </div>
+
+
+          <h3>
             F1 Optimal
           </h3>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                "repeat(2, minmax(0, 1fr))",
-              gap: "14px",
-              marginTop: "20px",
-            }}
-          >
+
+          <div className="threshold-main-metric">
+
+            <span>
+              RECALL
+            </span>
+
+            <strong>
+              {(f1Optimal.recall * 100).toFixed(2)}
+              <small>%</small>
+            </strong>
+
+            <p>
+              Precision과 Recall의 균형을 고려한
+              F1 최대 지점
+            </p>
+
+          </div>
+
+
+          <div className="threshold-metric-grid">
 
             <Metric
               label="Threshold"
@@ -109,80 +136,92 @@ export default function ThresholdComparison() {
             />
 
             <Metric
-              label="Recall"
-              value={`${(f1Optimal.recall * 100).toFixed(2)}%`}
-            />
-
-            <Metric
-              label="F1"
+              label="F1 Score"
               value={f1Optimal.f1.toFixed(4)}
             />
 
           </div>
 
-          <div
-            style={{
-              marginTop: "18px",
-              paddingTop: "18px",
-              borderTop:
-                "1px solid rgba(100, 120, 190, 0.12)",
-            }}
-          >
 
-            <span
-              style={{
-                display: "block",
-                fontSize: "12px",
-                opacity: 0.62,
-                marginBottom: "5px",
-              }}
-            >
-              PREDICTED POSITIVE
-            </span>
+          <div className="threshold-candidate-box">
 
-            <strong
-              style={{
-                fontSize: "26px",
-              }}
-            >
-              {f1Optimal.predictedPositive.toLocaleString()}명
-            </strong>
+            <div>
+
+              <span>
+                PREDICTED POSITIVE
+              </span>
+
+              <strong>
+                {f1Optimal.predictedPositive.toLocaleString()}
+                <small>명</small>
+              </strong>
+
+            </div>
+
+            <p>
+              상담 후보 고객
+            </p>
 
           </div>
 
         </div>
 
 
-        {/* RECALL 95 */}
 
-        <div
-          style={{
-            padding: "24px",
-            borderRadius: "22px",
-            border:
-              "1px solid rgba(100, 120, 190, 0.18)",
-            background:
-              "rgba(255, 255, 255, 0.82)",
-          }}
-        >
+        {/* ====================================
+            VS
+        ==================================== */}
 
-          <span className="eyebrow">
-            HIGH CAPTURE MODE
-          </span>
+        <div className="threshold-vs">
+          VS
+        </div>
 
-          <h3 style={{ marginTop: "8px" }}>
+
+
+        {/* ====================================
+            RECALL 95
+        ==================================== */}
+
+        <div className="threshold-strategy-card threshold-high-capture">
+
+          <div className="threshold-card-top">
+
+            <span className="threshold-mode-label">
+              HIGH CAPTURE MODE
+            </span>
+
+            <span className="threshold-badge threshold-badge-recall">
+              탐지 우선
+            </span>
+
+          </div>
+
+
+          <h3>
             Recall 95%
           </h3>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                "repeat(2, minmax(0, 1fr))",
-              gap: "14px",
-              marginTop: "20px",
-            }}
-          >
+
+          <div className="threshold-main-metric">
+
+            <span>
+              RECALL
+            </span>
+
+            <strong>
+              {(recall95.recall * 100).toFixed(2)}
+              <small>%</small>
+            </strong>
+
+            <p>
+              관심 고객을 최대한 놓치지 않는
+              고탐지 운영 지점
+            </p>
+
+          </div>
+
+
+          <div className="threshold-metric-grid">
 
             <Metric
               label="Threshold"
@@ -195,44 +234,31 @@ export default function ThresholdComparison() {
             />
 
             <Metric
-              label="Recall"
-              value={`${(recall95.recall * 100).toFixed(2)}%`}
-            />
-
-            <Metric
-              label="F1"
+              label="F1 Score"
               value={recall95.f1.toFixed(4)}
             />
 
           </div>
 
-          <div
-            style={{
-              marginTop: "18px",
-              paddingTop: "18px",
-              borderTop:
-                "1px solid rgba(100, 120, 190, 0.12)",
-            }}
-          >
 
-            <span
-              style={{
-                display: "block",
-                fontSize: "12px",
-                opacity: 0.62,
-                marginBottom: "5px",
-              }}
-            >
-              PREDICTED POSITIVE
-            </span>
+          <div className="threshold-candidate-box">
 
-            <strong
-              style={{
-                fontSize: "26px",
-              }}
-            >
-              {recall95.predictedPositive.toLocaleString()}명
-            </strong>
+            <div>
+
+              <span>
+                PREDICTED POSITIVE
+              </span>
+
+              <strong>
+                {recall95.predictedPositive.toLocaleString()}
+                <small>명</small>
+              </strong>
+
+            </div>
+
+            <p>
+              상담 후보 고객
+            </p>
 
           </div>
 
@@ -241,39 +267,84 @@ export default function ThresholdComparison() {
       </div>
 
 
+
+      {/* ========================================
+          RECALL CHANGE
+      ======================================== */}
+
+      <div className="threshold-recall-flow">
+
+        <div>
+
+          <span>
+            F1 Optimal Recall
+          </span>
+
+          <strong>
+            {(f1Optimal.recall * 100).toFixed(2)}%
+          </strong>
+
+        </div>
+
+
+        <div className="threshold-flow-line">
+
+          <span>
+            +{recallGain.toFixed(2)}%
+          </span>
+
+          <div>
+            <i />
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Recall 95% Strategy
+          </span>
+
+          <strong>
+            {(recall95.recall * 100).toFixed(2)}%
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
       {/* ========================================
           TRADE-OFF SUMMARY
       ======================================== */}
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fit, minmax(180px, 1fr))",
-          gap: "14px",
-          marginTop: "20px",
-        }}
-      >
+      <div className="threshold-summary-grid">
 
         <Summary
+          type="recall"
           label="Recall 증가"
           value={`+${recallGain.toFixed(2)}%p`}
           text="관심 고객 탐지 범위 확대"
         />
 
         <Summary
+          type="fn"
           label="False Negative 감소"
           value={`-${reducedFN.toLocaleString()}명`}
           text={`${f1Optimal.fn.toLocaleString()} → ${recall95.fn.toLocaleString()}`}
         />
 
         <Summary
+          type="tp"
           label="추가 탐지 고객"
           value={`+${additionalTP.toLocaleString()}명`}
           text={`${f1Optimal.tp.toLocaleString()} → ${recall95.tp.toLocaleString()}`}
         />
 
         <Summary
+          type="candidate"
           label="상담 후보 증가"
           value={`+${extraCandidates.toLocaleString()}명`}
           text={`${f1Optimal.predictedPositive.toLocaleString()} → ${recall95.predictedPositive.toLocaleString()}`}
@@ -282,53 +353,95 @@ export default function ThresholdComparison() {
       </div>
 
 
+
+      {/* ========================================
+          TRADE OFF BANNER
+      ======================================== */}
+
+      <div className="threshold-tradeoff-banner">
+
+        <div className="threshold-tradeoff-side">
+
+          <span>
+            BENEFIT
+          </span>
+
+          <strong>
+            FN {reducedFN.toLocaleString()}명 감소
+          </strong>
+
+          <p>
+            실제 관심 고객을 놓치는 위험 감소
+          </p>
+
+        </div>
+
+
+        <div className="threshold-tradeoff-center">
+          ↔
+        </div>
+
+
+        <div className="threshold-tradeoff-side">
+
+          <span>
+            COST
+          </span>
+
+          <strong>
+            후보 {extraCandidates.toLocaleString()}명 증가
+          </strong>
+
+          <p>
+            추가 상담·마케팅 자원 필요
+          </p>
+
+        </div>
+
+      </div>
+
+
+
       {/* ========================================
           BUSINESS INTERPRETATION
       ======================================== */}
 
-      <div
-        style={{
-          marginTop: "22px",
-          padding: "22px 24px",
-          borderRadius: "22px",
-          border:
-            "1px solid rgba(100, 120, 190, 0.14)",
-          background:
-            "rgba(247, 249, 255, 0.72)",
-        }}
-      >
+      <div className="threshold-business-note">
 
-        <span className="eyebrow">
-          BUSINESS INTERPRETATION
-        </span>
+        <div>
 
-        <h3
-          style={{
-            marginTop: "8px",
-            marginBottom: "10px",
-          }}
-        >
-          최적 Threshold는 하나로 고정되지 않습니다
-        </h3>
+          <span className="eyebrow">
+            BUSINESS INTERPRETATION
+          </span>
 
-        <p
-          className="model-description"
-          style={{
-            margin: 0,
-          }}
-        >
-          Recall 95% 전략은 F1 최적 전략보다 Recall을
-          {` ${recallGain.toFixed(2)}%p `}
-          높이고 놓치는 관심 고객을
-          {` ${reducedFN.toLocaleString()}명 `}
+          <h3>
+            최적 Threshold는 하나로 고정되지 않습니다
+          </h3>
+
+        </div>
+
+
+        <p>
+          Recall 95% 전략은 Recall을
+          <strong>
+            {" "}+{recallGain.toFixed(2)}%{" "}
+          </strong>
+          높이고 False Negative를
+          <strong>
+            {" "}{reducedFN.toLocaleString()}명{" "}
+          </strong>
           줄이는 대신, 상담 후보가
-          {` ${extraCandidates.toLocaleString()}명 `}
+          <strong>
+            {" "}+{extraCandidates.toLocaleString()}명{" "}
+          </strong>
           증가하고 Precision은
-          {` ${Math.abs(precisionChange).toFixed(2)}%p `}
+          <strong>
+            {" "}-{precisionDrop.toFixed(2)}%{" "}
+          </strong>
           감소합니다.
-          따라서 실제 상담 비용, 예산, 상담 가능 인원이 주어진다면
-          해당 자원 제약 안에서 최대 Recall을 확보하는 Threshold를
-          운영 정책으로 선택할 수 있습니다.
+          실제 상담 비용, 예산, 상담 가능 인원이 주어진다면
+          해당 자원 제약 안에서 최대 Recall을 확보하는
+          Threshold를 운영 정책으로 선택할 수 있습니다.
         </p>
 
       </div>
@@ -338,6 +451,7 @@ export default function ThresholdComparison() {
 }
 
 
+
 function Metric({
   label,
   value,
@@ -345,80 +459,52 @@ function Metric({
   label: string;
   value: string;
 }) {
+
   return (
-    <div>
-      <span
-        style={{
-          display: "block",
-          fontSize: "11px",
-          opacity: 0.58,
-          marginBottom: "4px",
-        }}
-      >
+    <div className="threshold-small-metric">
+
+      <span>
         {label}
       </span>
 
-      <strong
-        style={{
-          fontSize: "20px",
-        }}
-      >
+      <strong>
         {value}
       </strong>
+
     </div>
   );
 }
 
 
+
 function Summary({
+  type,
   label,
   value,
   text,
 }: {
+  type: string;
   label: string;
   value: string;
   text: string;
 }) {
+
   return (
     <div
-      style={{
-        padding: "18px 20px",
-        borderRadius: "18px",
-        border:
-          "1px solid rgba(100, 120, 190, 0.12)",
-      }}
+      className={`threshold-summary-card threshold-summary-${type}`}
     >
 
-      <span
-        style={{
-          display: "block",
-          fontSize: "11px",
-          opacity: 0.58,
-        }}
-      >
+      <span>
         {label}
       </span>
 
-      <strong
-        style={{
-          display: "block",
-          fontSize: "22px",
-          marginTop: "4px",
-        }}
-      >
+      <strong>
         {value}
       </strong>
 
-      <span
-        style={{
-          display: "block",
-          fontSize: "12px",
-          opacity: 0.62,
-          marginTop: "5px",
-        }}
-      >
+      <p>
         {text}
-      </span>
+      </p>
 
     </div>
   );

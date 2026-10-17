@@ -3991,3 +3991,921 @@ footer {
 
   font-size: 22px;
 }
+
+/* =========================================================
+   SHAP DIRECTION LEGEND
+========================================================= */
+
+.shap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+
+  margin-top: 8px;
+  padding: 18px 20px;
+
+  border-radius: 18px;
+  background: rgba(247, 249, 255, 0.7);
+  border: 1px solid rgba(100, 120, 190, 0.1);
+}
+
+
+.shap-legend > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+
+/* Negative SHAP */
+
+.shap-negative {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 8px 13px;
+
+  border-radius: 999px;
+
+  background: rgba(79, 126, 235, 0.11);
+  border: 1px solid rgba(79, 126, 235, 0.16);
+
+  color: #5577d7;
+
+  font-size: 13px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+
+/* Positive SHAP */
+
+.shap-positive {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 8px 13px;
+
+  border-radius: 999px;
+
+  background: rgba(216, 87, 158, 0.10);
+  border: 1px solid rgba(216, 87, 158, 0.15);
+
+  color: #c45494;
+
+  font-size: 13px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+
+/* Response 방향 설명 */
+
+.shap-legend > div > span:last-child {
+  color: #7e8ba4;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+
+@media (max-width: 700px) {
+  .shap-legend {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .shap-legend > div {
+    justify-content: center;
+  }
+}
+
+/* =========================================================
+   THRESHOLD COMPARISON
+========================================================= */
+
+.threshold-panel {
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   STRATEGY CARDS
+========================================================= */
+
+.threshold-strategy-grid {
+  position: relative;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    54px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 28px;
+}
+
+
+.threshold-strategy-card {
+  position: relative;
+
+  min-width: 0;
+
+  padding: 30px 34px;
+
+  border-radius: 28px;
+
+  overflow: hidden;
+}
+
+
+.threshold-strategy-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+}
+
+
+.threshold-balanced {
+  border:
+    1px solid rgba(75, 112, 220, 0.15);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(239, 244, 255, 0.95),
+      rgba(255, 255, 255, 0.72)
+    );
+}
+
+
+.threshold-balanced::before {
+  background:
+    linear-gradient(
+      90deg,
+      #5b7dea,
+      #79a3ff
+    );
+}
+
+
+.threshold-high-capture {
+  border:
+    1px solid rgba(183, 88, 207, 0.15);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(250, 242, 255, 0.90),
+      rgba(255, 255, 255, 0.78)
+    );
+}
+
+
+.threshold-high-capture::before {
+  background:
+    linear-gradient(
+      90deg,
+      #9268e7,
+      #d46aba
+    );
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.threshold-card-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+
+.threshold-mode-label {
+  font-size: 12px;
+  font-weight: 850;
+
+  letter-spacing: 0.18em;
+
+  color: #6074c9;
+}
+
+
+.threshold-high-capture
+.threshold-mode-label {
+  color: #9b61c8;
+}
+
+
+.threshold-badge {
+  padding: 7px 11px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 750;
+
+  white-space: nowrap;
+}
+
+
+.threshold-badge-balanced {
+  color: #526fcf;
+
+  background:
+    rgba(83, 112, 211, 0.09);
+
+  border:
+    1px solid rgba(83, 112, 211, 0.12);
+}
+
+
+.threshold-badge-recall {
+  color: #ae5ca4;
+
+  background:
+    rgba(196, 86, 166, 0.09);
+
+  border:
+    1px solid rgba(196, 86, 166, 0.12);
+}
+
+
+.threshold-strategy-card h3 {
+  margin:
+    14px 0 24px;
+
+  font-size: 24px;
+  font-weight: 760;
+
+  color: #1f2b45;
+}
+
+
+/* =========================================================
+   MAIN RECALL
+========================================================= */
+
+.threshold-main-metric {
+  margin-bottom: 26px;
+}
+
+
+.threshold-main-metric > span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  color: #96a2b8;
+}
+
+
+.threshold-main-metric > strong {
+  display: block;
+
+  font-size: 44px;
+  line-height: 1;
+
+  letter-spacing: -0.04em;
+
+  color: #263753;
+}
+
+
+.threshold-balanced
+.threshold-main-metric > strong {
+  color: #4967cf;
+}
+
+
+.threshold-high-capture
+.threshold-main-metric > strong {
+  color: #a354a5;
+}
+
+
+.threshold-main-metric > strong small {
+  margin-left: 3px;
+
+  font-size: 21px;
+}
+
+
+.threshold-main-metric p {
+  margin:
+    10px 0 0;
+
+  font-size: 13px;
+
+  line-height: 1.55;
+
+  color: #8592aa;
+}
+
+
+/* =========================================================
+   SUB METRICS
+========================================================= */
+
+.threshold-metric-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+.threshold-small-metric {
+  padding:
+    15px 16px;
+
+  border-radius: 16px;
+
+  border:
+    1px solid rgba(104, 121, 174, 0.09);
+
+  background:
+    rgba(255, 255, 255, 0.48);
+}
+
+
+.threshold-small-metric span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 11px;
+
+  color: #8d99af;
+}
+
+
+.threshold-small-metric strong {
+  display: block;
+
+  font-size: 17px;
+
+  color: #25324b;
+}
+
+
+/* =========================================================
+   CANDIDATES
+========================================================= */
+
+.threshold-candidate-box {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 22px;
+  padding-top: 20px;
+
+  border-top:
+    1px solid rgba(100, 120, 190, 0.10);
+}
+
+
+.threshold-candidate-box span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  color: #98a4b8;
+}
+
+
+.threshold-candidate-box strong {
+  display: block;
+
+  font-size: 27px;
+
+  color: #23304a;
+}
+
+
+.threshold-candidate-box strong small {
+  margin-left: 2px;
+
+  font-size: 16px;
+}
+
+
+.threshold-candidate-box p {
+  margin: 0;
+
+  font-size: 12px;
+
+  color: #8a97ad;
+}
+
+
+/* =========================================================
+   VS
+========================================================= */
+
+.threshold-vs {
+  z-index: 2;
+
+  width: 48px;
+  height: 48px;
+
+  margin: auto;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border:
+    1px solid rgba(111, 112, 190, 0.14);
+
+  background:
+    rgba(255, 255, 255, 0.92);
+
+  box-shadow:
+    0 8px 25px rgba(80, 90, 140, 0.10);
+
+  font-size: 12px;
+  font-weight: 850;
+
+  color: #7683aa;
+}
+
+
+/* =========================================================
+   RECALL FLOW
+========================================================= */
+
+.threshold-recall-flow {
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(140px, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-top: 22px;
+
+  padding:
+    20px 28px;
+
+  border-radius: 20px;
+
+  border:
+    1px solid rgba(100, 120, 190, 0.10);
+
+  background:
+    rgba(248, 250, 255, 0.66);
+}
+
+
+.threshold-recall-flow > div:first-child,
+.threshold-recall-flow > div:last-child {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.threshold-recall-flow span {
+  font-size: 11px;
+
+  color: #929eb3;
+}
+
+
+.threshold-recall-flow strong {
+  margin-top: 3px;
+
+  font-size: 20px;
+
+  color: #31415d;
+}
+
+
+.threshold-flow-line {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 5px;
+}
+
+
+.threshold-flow-line > span {
+  color: #8e65c3;
+
+  font-size: 20px;
+  font-weight: 850;
+  line-height: 1;
+
+  letter-spacing: -0.02em;
+}
+
+
+.threshold-flow-line > div {
+  position: relative;
+
+  width: 100%;
+  height: 3px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #6583e5,
+      #bd69b8
+    );
+}
+
+
+.threshold-flow-line i {
+  position: absolute;
+
+  right: -1px;
+  top: 50%;
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #bc69b8;
+
+  transform:
+    translateY(-50%);
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+========================================================= */
+
+.threshold-summary-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-top: 18px;
+}
+
+
+.threshold-summary-card {
+  position: relative;
+
+  padding:
+    20px 22px;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(100, 120, 190, 0.10);
+
+  background:
+    rgba(255, 255, 255, 0.58);
+}
+
+
+.threshold-summary-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+}
+
+
+.threshold-summary-recall::before {
+  background: #647ee1;
+}
+
+
+.threshold-summary-fn::before {
+  background: #7469d7;
+}
+
+
+.threshold-summary-tp::before {
+  background: #a363c4;
+}
+
+
+.threshold-summary-candidate::before {
+  background: #c36aab;
+}
+
+
+.threshold-summary-card > span {
+  display: block;
+
+  margin-bottom: 9px;
+
+  font-size: 12px;
+
+  color: #8996ac;
+}
+
+
+.threshold-summary-card > strong {
+  display: block;
+
+  font-size: 24px;
+
+  color: #25324b;
+}
+
+
+.threshold-summary-card > p {
+  margin:
+    8px 0 0;
+
+  font-size: 12px;
+
+  color: #8d99ae;
+}
+
+
+/* =========================================================
+   TRADE OFF
+========================================================= */
+
+.threshold-tradeoff-banner {
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    70px
+    1fr;
+
+  align-items: center;
+
+  margin-top: 18px;
+
+  padding:
+    22px 28px;
+
+  border-radius: 22px;
+
+  border:
+    1px solid rgba(108, 116, 175, 0.12);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(93, 125, 223, 0.055),
+      rgba(255, 255, 255, 0.62),
+      rgba(190, 96, 174, 0.055)
+    );
+}
+
+
+.threshold-tradeoff-side span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 10px;
+  font-weight: 850;
+
+  letter-spacing: 0.12em;
+
+  color: #909cb1;
+}
+
+
+.threshold-tradeoff-side strong {
+  display: block;
+
+  font-size: 21px;
+
+  color: #2a3751;
+}
+
+
+.threshold-tradeoff-side p {
+  margin:
+    5px 0 0;
+
+  font-size: 12px;
+
+  color: #8b97ab;
+}
+
+
+.threshold-tradeoff-center {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+
+  color: #9aa6bb;
+}
+
+
+/* =========================================================
+   BUSINESS NOTE
+========================================================= */
+
+.threshold-business-note {
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 0.7fr)
+    minmax(0, 1.6fr);
+
+  align-items: center;
+
+  gap: 36px;
+
+  margin-top: 18px;
+
+  padding:
+    24px 28px;
+
+  border-radius: 22px;
+
+  background:
+    rgba(247, 249, 255, 0.72);
+
+  border:
+    1px solid rgba(100, 120, 190, 0.10);
+}
+
+
+.threshold-business-note h3 {
+  margin:
+    7px 0 0;
+
+  font-size: 18px;
+
+  color: #26344d;
+}
+
+
+.threshold-business-note > p {
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.7;
+
+  color: #79869e;
+}
+
+
+.threshold-business-note > p strong {
+  color: #475d9d;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .threshold-strategy-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .threshold-vs {
+    margin:
+      -3px auto;
+
+    width: 42px;
+    height: 42px;
+  }
+
+
+  .threshold-summary-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .threshold-business-note {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .threshold-strategy-card {
+    padding:
+      24px 22px;
+  }
+
+
+  .threshold-metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .threshold-recall-flow {
+    grid-template-columns: 1fr;
+
+    text-align: center;
+  }
+
+
+  .threshold-flow-line {
+    min-height: 48px;
+
+    justify-content: center;
+  }
+
+
+  .threshold-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .threshold-tradeoff-banner {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+
+    text-align: center;
+  }
+
+
+  .threshold-tradeoff-center {
+    transform: rotate(90deg);
+  }
+
+}
+
+/* Summary 카드 상단 컬러 라인 제거 */
+.threshold-summary-card::before {
+  display: none;
+}
+
+/* BUSINESS INTERPRETATION 제목 줄바꿈 방지 */
+
+.threshold-business-note {
+  grid-template-columns:
+    minmax(430px, 0.9fr)
+    minmax(0, 1.7fr);
+}
+
+.threshold-business-note h3 {
+  white-space: nowrap;
+  word-break: keep-all;
+}
