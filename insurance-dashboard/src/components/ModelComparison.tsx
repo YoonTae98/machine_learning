@@ -1,4 +1,7 @@
-import { modelComparison } from "@/data/dashboard";
+import {
+  modelComparison,
+  ensembleResult,
+} from "@/data/dashboard";
 
 import { BarChart } from "@/components/charts/bar-chart";
 import { Bar } from "@/components/charts/bar";
@@ -22,24 +25,25 @@ export default function ModelComparison() {
           </span>
 
           <h2>
-            모델별 Validation F1 Score
+            6개 분류 모델 성능 비교
           </h2>
 
           <p className="model-description">
-            각 모델별 최적 Threshold를 적용한
-            Hold-out Validation 성능 비교
+            초기 전체 Feature(Vintage 포함)를 기준으로
+            각 모델의 OOF 예측 성능을 비교했습니다.
+            불균형 데이터 특성을 고려해 F1, ROC-AUC, AP를 함께 평가했습니다.
           </p>
         </div>
 
         <span className="section-note">
-          Optimized Threshold
+          5-Fold OOF
         </span>
 
       </div>
 
 
       {/* ========================================
-          BKLIT BAR CHART
+          MODEL BAR CHART
       ======================================== */}
 
       <div className="chart-frame">
@@ -51,7 +55,7 @@ export default function ModelComparison() {
           margin={{
             top: 28,
             right: 28,
-            bottom: 55,
+            bottom: 65,
             left: 28,
           }}
           barGap={0.38}
@@ -68,7 +72,7 @@ export default function ModelComparison() {
 
           <BarXAxis
             showAllLabels
-            maxLabels={4}
+            maxLabels={6}
           />
 
 
@@ -80,9 +84,7 @@ export default function ModelComparison() {
             showCrosshair={false}
             showDots={false}
             showDatePill={false}
-
             damping={28}
-
             backgroundColor="rgba(255, 255, 255, 0.80)"
 
             panelStyle={{
@@ -106,8 +108,6 @@ export default function ModelComparison() {
             content={({ point }) => (
               <div className="model-tooltip">
 
-                {/* 모델 이름 */}
-
                 <div className="model-tooltip-top">
 
                   <span className="model-tooltip-dot" />
@@ -118,8 +118,6 @@ export default function ModelComparison() {
 
                 </div>
 
-
-                {/* F1 */}
 
                 <div className="model-tooltip-main">
 
@@ -135,8 +133,6 @@ export default function ModelComparison() {
 
                 </div>
 
-
-                {/* 세부 지표 */}
 
                 <div className="model-tooltip-sub">
 
@@ -224,6 +220,152 @@ export default function ModelComparison() {
           </div>
 
         ))}
+
+      </div>
+
+
+      {/* ========================================
+          MODEL SELECTION INSIGHT
+      ======================================== */}
+
+      <div
+        style={{
+          marginTop: "28px",
+          padding: "22px 24px",
+          borderRadius: "22px",
+          border: "1px solid rgba(100, 120, 190, 0.14)",
+          background:
+            "rgba(247, 249, 255, 0.72)",
+        }}
+      >
+
+        <span className="eyebrow">
+          MODEL SELECTION
+        </span>
+
+        <h3
+          style={{
+            marginTop: "8px",
+            marginBottom: "8px",
+          }}
+        >
+          XGBoost 최종 후보 선정
+        </h3>
+
+        <p
+          className="model-description"
+          style={{
+            margin: 0,
+          }}
+        >
+          XGBoost, LightGBM, Gradient Boosting의 성능은 매우 유사했지만,
+          XGBoost가 ROC-AUC와 AP에서 가장 높은 성능을 보여
+          최종 후보 모델로 선정했습니다.
+        </p>
+
+      </div>
+
+
+      {/* ========================================
+          SOFT VOTING EXPERIMENT
+      ======================================== */}
+
+      <div
+        style={{
+          marginTop: "20px",
+          padding: "24px",
+          borderRadius: "22px",
+          border: "1px solid rgba(100, 120, 190, 0.14)",
+          background:
+            "rgba(255, 255, 255, 0.72)",
+        }}
+      >
+
+        <div className="section-heading">
+
+          <div>
+
+            <span className="eyebrow">
+              ADDITIONAL EXPERIMENT
+            </span>
+
+            <h3>
+              Soft Voting 앙상블
+            </h3>
+
+            <p className="model-description">
+              상위 모델인 XGBoost, LightGBM,
+              Gradient Boosting의 예측 확률을 결합한
+              Soft Voting을 추가로 실험했습니다.
+            </p>
+
+          </div>
+
+          <span className="section-note">
+            Vintage 포함 실험
+          </span>
+
+        </div>
+
+
+        <div className="model-table">
+
+          <div className="model-row model-header">
+
+            <strong>
+              Model
+            </strong>
+
+            <strong>
+              F1
+            </strong>
+
+            <strong>
+              ROC-AUC
+            </strong>
+
+            <strong>
+              AP
+            </strong>
+
+          </div>
+
+
+          <div className="model-row">
+
+            <strong>
+              {ensembleResult.model}
+            </strong>
+
+            <span>
+              {ensembleResult.f1.toFixed(4)}
+            </span>
+
+            <span>
+              {ensembleResult.rocAuc.toFixed(4)}
+            </span>
+
+            <span>
+              {ensembleResult.ap.toFixed(4)}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <p
+          className="model-description"
+          style={{
+            marginTop: "18px",
+            marginBottom: 0,
+          }}
+        >
+          Soft Voting은 AP와 ROC-AUC가 소폭 상승했지만,
+          개선 폭이 매우 작고 세 개 모델을 동시에 운영해야 하는
+          복잡성이 증가했습니다. 따라서 최종 모델은
+          단일 XGBoost로 유지했습니다.
+        </p>
 
       </div>
 

@@ -833,7 +833,7 @@ function CurveChart({
 
               <span>
                 Final threshold{" "}
-                {data.summary.threshold.toFixed(4)}
+                {data.summary.threshold.toFixed(6)}
               </span>
 
             </div>
@@ -1066,7 +1066,7 @@ export default function PerformanceCurves() {
           </span>
 
           <strong>
-            {data.summary.threshold.toFixed(4)}
+            {data.summary.threshold.toFixed(6)}
           </strong>
 
         </div>

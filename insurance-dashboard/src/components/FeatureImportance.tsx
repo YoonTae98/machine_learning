@@ -32,14 +32,15 @@ export default function FeatureImportance() {
 
 
           <p className="model-description">
-            XGBoost Total Gain 기준 원래 변수 단위 중요도
+            최종 9개 Feature XGBoost의 Total Gain을
+            원래 변수 단위로 합산한 중요도입니다.
           </p>
 
         </div>
 
 
         <span className="section-note">
-          Total Gain
+          9 Final Features · Total Gain
         </span>
 
       </div>

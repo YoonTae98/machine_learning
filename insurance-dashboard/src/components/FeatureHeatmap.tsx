@@ -154,8 +154,8 @@ export default function FeatureHeatmap() {
 
 
           <p className="model-description">
-            연속형과 범주형 변수를 함께 비교하기 위해
-            Phi_K 연관계수를 사용했습니다.
+            Feature Selection 이전 전체 후보 변수의 관계를
+            Phi_K 연관계수로 분석했습니다.
             값이 클수록 두 변수 사이의 연관성이 강합니다.
           </p>
 
@@ -417,6 +417,57 @@ export default function FeatureHeatmap() {
           </span>
 
         )}
+
+      </div>
+
+
+
+      {/* ========================================
+          FEATURE SELECTION
+      ======================================== */}
+
+      <div
+        style={{
+          marginTop: "22px",
+          padding: "22px 24px",
+          borderRadius: "22px",
+          border: "1px solid rgba(100, 120, 190, 0.14)",
+          background: "rgba(247, 249, 255, 0.72)",
+        }}
+      >
+
+        <div className="section-heading">
+
+          <div>
+
+            <span className="eyebrow">
+              FEATURE SELECTION
+            </span>
+
+            <h3>
+              Vintage 제거
+            </h3>
+
+            <p
+              className="model-description"
+              style={{
+                marginBottom: 0,
+              }}
+            >
+              Vintage는 Response와의 Phi_K가 0.0045로
+              거의 연관성이 없었으며, Point-Biserial 분석에서도
+              r = -0.0011, p = 0.5167로 통계적으로 유의한
+              관계가 확인되지 않았습니다.
+              따라서 최종 모델 입력 변수에서 제외했습니다.
+            </p>
+
+          </div>
+
+          <span className="section-note">
+            Final → 9 Features
+          </span>
+
+        </div>
 
       </div>
 

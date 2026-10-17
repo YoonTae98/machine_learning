@@ -12,6 +12,7 @@ import FeatureHeatmap from "@/components/FeatureHeatmap";
 
 import ModelComparison from "@/components/ModelComparison";
 import PerformanceCurves from "@/components/PerformanceCurves";
+import ThresholdComparison from "@/components/ThresholdComparison";
 import ConfusionMatrix from "@/components/ConfusionMatrix";
 
 import FeatureImportance from "@/components/FeatureImportance";
@@ -279,6 +280,17 @@ function App() {
       <section className="content-section">
 
         <PerformanceCurves />
+
+      </section>
+
+
+      {/* ========================================
+          THRESHOLD OPERATING STRATEGY
+      ======================================== */}
+
+      <section className="content-section">
+
+        <ThresholdComparison />
 
       </section>
 

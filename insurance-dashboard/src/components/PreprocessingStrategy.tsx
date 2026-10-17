@@ -761,7 +761,7 @@ export default function PreprocessingStrategy() {
             </p>
 
             <div className="control-tag">
-              Threshold 0.2285
+              Threshold 0.222612
             </div>
 
           </div>
@@ -813,8 +813,8 @@ export default function PreprocessingStrategy() {
             </strong>
 
             <p>
-              XGBoost의 OOF F1 0.4592와
-              Hold-out Validation F1 0.4605가 거의 동일하게 나타나
+              XGBoost의 OOF F1 0.4600과
+              Hold-out Validation F1 0.4602가 거의 동일하게 나타나
               큰 일반화 성능 저하는 확인되지 않았습니다.
             </p>
 

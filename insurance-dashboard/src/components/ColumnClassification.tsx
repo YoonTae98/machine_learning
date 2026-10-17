@@ -1,14 +1,13 @@
 const columnGroups = [
   {
     type: "Numeric",
-    count: 3,
+    count: 2,
     className: "column-numeric",
     description: "연속적인 수치 정보를 가지는 변수",
     preprocessing: "Logistic → StandardScaler",
     columns: [
       "Age",
       "Annual_Premium",
-      "Vintage",
     ],
   },
 
@@ -62,15 +61,14 @@ export default function ColumnClassification() {
           </h2>
 
           <p className="model-description">
-            데이터 타입이 아닌 변수의 실제 의미를 기준으로
-            입력 컬럼의 역할과 전처리 방식을 구분했습니다.
+            변수의 실제 의미를 기준으로 최종 입력 Feature를 분류하고,
+            모델별 특성에 맞는 전처리 방식을 적용했습니다.
           </p>
 
         </div>
 
-
         <span className="section-note">
-          12 Original Columns
+          9 Final Features
         </span>
 
       </div>
@@ -89,8 +87,6 @@ export default function ColumnClassification() {
             className={`column-card ${group.className}`}
             key={group.type}
           >
-
-            {/* CARD TOP */}
 
             <div className="column-card-top">
 
@@ -112,9 +108,6 @@ export default function ColumnClassification() {
             </div>
 
 
-
-            {/* TITLE */}
-
             <div className="column-card-title">
 
               <span className="column-type-dot" />
@@ -126,16 +119,10 @@ export default function ColumnClassification() {
             </div>
 
 
-
-            {/* DESCRIPTION */}
-
             <p className="column-card-description">
               {group.description}
             </p>
 
-
-
-            {/* COLUMN LIST */}
 
             <div className="column-chip-list">
 
@@ -152,9 +139,6 @@ export default function ColumnClassification() {
 
             </div>
 
-
-
-            {/* PREPROCESSING */}
 
             <div className="column-preprocess">
 
@@ -180,7 +164,7 @@ export default function ColumnClassification() {
           SPECIAL COLUMNS
       ======================================== */}
 
-      <div className="special-column-grid">
+      <div className="special-column-grid final-special-grid">
 
         {/* ID */}
 
@@ -189,7 +173,6 @@ export default function ColumnClassification() {
           <div className="special-column-icon">
             ×
           </div>
-
 
           <div>
 
@@ -202,13 +185,41 @@ export default function ColumnClassification() {
             </strong>
 
             <p>
-              단순 식별자이므로 모델 입력에서 제거
+              모든 행에서 고유한 단순 식별자이므로
+              모델 입력에서 제거했습니다.
             </p>
 
           </div>
 
         </div>
 
+
+        {/* VINTAGE */}
+
+        <div className="special-column-card excluded-column">
+
+          <div className="special-column-icon">
+            ×
+          </div>
+
+          <div>
+
+            <span>
+              FEATURE REMOVED
+            </span>
+
+            <strong>
+              Vintage
+            </strong>
+
+            <p>
+              Phi_K 0.0045 · p-value 0.5167로
+              Response와 유의한 관계가 확인되지 않아 제거했습니다.
+            </p>
+
+          </div>
+
+        </div>
 
 
         {/* TARGET */}
@@ -218,7 +229,6 @@ export default function ColumnClassification() {
           <div className="special-column-icon">
             ◎
           </div>
-
 
           <div>
 
@@ -231,7 +241,8 @@ export default function ColumnClassification() {
             </strong>
 
             <p>
-              보험 관심 여부 · 0 = 비관심 / 1 = 관심
+              보험 관심 여부
+              · 0 = 비관심 / 1 = 관심
             </p>
 
           </div>
@@ -243,16 +254,16 @@ export default function ColumnClassification() {
 
 
       {/* ========================================
-          DATA FLOW
+          FINAL DATA FLOW
       ======================================== */}
 
-      <div className="column-flow">
+      <div className="final-column-flow">
 
         {/* ORIGINAL */}
 
-        <div className="column-flow-step">
+        <div className="final-flow-step">
 
-          <span className="column-flow-label">
+          <span>
             ORIGINAL DATA
           </span>
 
@@ -263,107 +274,85 @@ export default function ColumnClassification() {
         </div>
 
 
-        <div className="flow-arrow">
+        <div className="final-flow-arrow">
           →
         </div>
 
 
+        {/* DATA SEPARATION */}
 
-        {/* EXCLUDE */}
+        <div className="final-flow-step">
 
-        <div className="column-flow-step">
-
-          <span className="column-flow-label">
-            EXCLUDE
+          <span>
+            DATA SEPARATION
           </span>
 
           <strong>
             id 제거
           </strong>
 
+          <small>
+            Response 분리
+          </small>
+
         </div>
 
 
-        <div className="flow-arrow">
+        <div className="final-flow-arrow">
           →
         </div>
 
 
+        {/* FEATURE SELECTION */}
 
-        {/* TARGET SPLIT */}
+        <div className="final-flow-step">
 
-        <div className="column-flow-step target-flow-step">
-
-          <span className="column-flow-label">
-            TARGET SPLIT
+          <span>
+            FEATURE SELECTION
           </span>
 
           <strong>
-            Response 분리
+            Vintage 제거
           </strong>
 
         </div>
 
 
-        <div className="flow-arrow">
+        <div className="final-flow-arrow">
           →
         </div>
 
 
+        {/* FINAL INPUT */}
 
-        {/* INPUT + TARGET */}
+        <div className="final-flow-step final-input-step">
 
-        <div className="column-flow-result">
+          <span>
+            FINAL INPUT
+          </span>
 
-          <div>
-
-            <span>
-              INPUT
-            </span>
-
-            <strong>
-              10 Features
-            </strong>
-
-          </div>
-
-
-          <div className="column-flow-plus">
-            +
-          </div>
-
-
-          <div>
-
-            <span>
-              TARGET
-            </span>
-
-            <strong>
-              Response
-            </strong>
-
-          </div>
+          <strong>
+            9 Features
+          </strong>
 
         </div>
 
 
-        <div className="flow-arrow">
+        <div className="final-flow-arrow">
           →
         </div>
-
 
 
         {/* MODEL */}
 
-        <div className="column-flow-model">
+        <div className="final-flow-step final-model-step">
 
           <span>
             MODEL
           </span>
 
           <strong>
-            Training Input
+            XGBoost
           </strong>
 
         </div>
