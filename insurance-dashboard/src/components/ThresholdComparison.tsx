@@ -325,7 +325,7 @@ export default function ThresholdComparison() {
         <Summary
           type="recall"
           label="Recall 증가"
-          value={`+${recallGain.toFixed(2)}%p`}
+          value={`+${recallGain.toFixed(2)}%`}
           text="관심 고객 탐지 범위 확대"
         />
 
