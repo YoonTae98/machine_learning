@@ -8,5 +8,3 @@ __pycache__/
 ./submission.csv
 ./submission_probability.csv
 ./ML_Class/data
-./project
-./insurance-dashboard
