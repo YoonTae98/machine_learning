@@ -3,6 +3,10 @@
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
+# Local API credentials (keep secrets out of Git)
+.env
+.env.*
+!.env.example
 ./test.csv
 ./train.csv
 ./submission.csv
